@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+        <!-- Cars Search View -->
+        
+        <record model="ir.ui.view" id="car_search">
+            <field name="name">car.result.tree</field>
+            <field name="model">car.rental</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Car_result">
+                    <field name="car_make_id" groups="base.group_extended"/> 
+                    <field name="car_brand_id" groups="base.group_extended"/> 
+					<field name="car_class_id" groups="base.group_extended"/> 
+					<field name="car_color_id" groups="base.group_extended"/> 
+                    <field name="cost"/>
+                    <field name="rent_start_date"/>
+                    <field name="rent_end_date"/>
+                    <!-- <field name="rent_state"/> -->
+                    <field name="notes"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Car Form View -->
+        <record id="car_rental_form" model="ir.ui.view">
+            <field name="name">car.result.form</field>
+            <field name="model">car.rental</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Car_result">
+                    <group colspan="2" col="4">
+						<separator string="Vehicle Details" colspan="4" />
+						<field name="name" select="1" /><!--on_change="_getlastodo(name,regnno)"/-->
+						<field name="regnno" />
+						<field name="company" />
+						<field name="location" />
+						<field name="cost"/>
+                        <field name="rent_start_date"/>
+                        <field name="rent_end_date"/>
+                       <!-- <field name="rent_state"/> -->
+                        <field name="notes"/>
+					</group>
+					<separator string="Analysis Information" colspan="4" />
+					<notebook>
+						<page string="Additional Details">
+							<separator string="Manufacture Details"
+								colspan="4" />
+							<field name="year" />
+							<field name="car_make_id" groups="base.group_extended"/> 
+                            <field name="car_brand_id" groups="base.group_extended"/> 
+					        <field name="car_class_id" groups="base.group_extended"/> 
+					        <field name="car_color_id" groups="base.group_extended"/>
+							<field name="serial" />
+							<field name="type" />
+							<separator string="Current Details" colspan="4" />
+							<field name="status" />
+							<field name="ownership" />
+						</page>
+						<page string="Purchase Details">
+							<field name="pdate" />
+							<field name="ppartner" />
+							<field name="pinvoice" />
+							<field name="pcost" />
+							<field name="podometer" />
+							<separator string="Warranty Expiry"	colspan="4" />
+							<field name="warrexp" />
+							<field name="warrexpmil" />
+							<separator string="Financial Details" colspan="4" />
+							<field name="deprecperc" />
+							<field name="deprecperd" />
+							<field name="assetacc" />
+							<field name="depracc"/>
+						</page>
+						<page string="Fuel and Maintainace">
+							<field name="primarymeter" />
+							<field name="startodometer" />
+							<newline />
+							<!-- field name="lastodometer" /-->
+							<!-- field name="lastrecdate" /-->
+							<separator string="Fuel Details"
+								colspan="4" />
+							<field name="fueltype" />
+							<!--field name="fuelcardno" /-->
+							<field name="fueltankcap" />
+							<separator string="Preventive Maintainance"
+								colspan="4" />
+						<!--	<field name="schedname" /> -->
+							<field name="cmil" />
+							<field name="bmil" />
+							<field name="bdate" />
+						</page>
+					</notebook>
+				   <!-- <field name="product_id"/> --> 
+                     
+                    
+                </form>
+            </field>
+        </record>
+        <!-- ########################## -->
+        			
+						
+				
+        
+        <!-- ########################## -->
+        <!-- Car Rental Action -->
+        <record id="action_car_rental" model="ir.actions.act_window">
+            <field name="name">Car Rental</field>
+            <field name="res_model">car.rental</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <!-- veihcle information configuration --> 
+        <record id="action_car_make" model="ir.actions.act_window">
+            <field name="name">Car Make</field>
+            <field name="res_model">car.make</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record id="action_car_brand" model="ir.actions.act_window">
+            <field name="name">Car Brand</field>
+            <field name="res_model">car.brand</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record id="action_car_class" model="ir.actions.act_window">
+            <field name="name">Car Class</field>
+            <field name="res_model">car.class</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem id="car_parent" name="Car Rental" />
+        <menuitem id="menu_car_parent" name="Car Rental Management" parent="car_parent"/>
+        <menuitem action="action_car_rental" id="menu_car_rental" parent="menu_car_parent" string="Result"/>
+        
+               
+    </data>
+</openerp>
